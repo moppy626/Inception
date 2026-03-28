@@ -11,10 +11,16 @@ bash
 
 apt update
 apt -y install nginx
+apt install -y openssl
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+	-keyout /etc/ssl/certs/server.key \
+	-out /etc/ssl/certs/server.crt \
+	-subj "/C=JP/ST=Tokyo/L=Shinjyuku/O=42Tokyo/CN=mmachida.42.fr"
 
 service nginx start
 
 ```
+
 
 
 * [Ubuntu 20.04にNginxをインストールする方法](https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-20-04-ja)
@@ -22,4 +28,4 @@ service nginx start
 * [Nginx SSL/TLS設定を TLS 1.2と1.3に変更](https://arakoki70.com/?p=5781)
 * [nginx連載6回目: nginxの設定、その4 - TLS/SSLの設定](https://heartbeats.jp/hbblog/2012/06/nginx06.html)
 * [nginx ドキュメント日本語訳](https://mogile.web.fc2.com/nginx/docs/)
-
+* [Nginxの自己署名証明書によるHTTPS化](https://kkspecial.hatenablog.com/entry/2025/09/14/223630)

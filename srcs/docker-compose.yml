@@ -7,10 +7,10 @@ services:
       - db_data:/var/lib/mysql
     restart: always
     environment:
-      MARIADB_ROOT_PASSWORD: examplepassword
+      MARIADB_ROOT_PASSWORD: pass
       MARIADB_DATABASE: wordpress
       MARIADB_USER: user
-      MARIADB_PASSWORD: examplepassword
+      MARIADB_PASSWORD: pass
   
   wordpress:
     depends_on:
@@ -18,18 +18,15 @@ services:
     build: requirements/wordpress/.
     volumes:
       - ./requirements/wordpress/www.conf:/etc/php/8.4/fpm/pool.d/www.conf
+      - ./requirements/wordpress/wp-config.php:/var/www/html/wp-config.php   
       - wp_data:/var/www/html
-    restart: always
-    environment:
-      WORDPRESS_DB_HOST: mariadb
-      WORDPRESS_DB_USER: user
-      WORDPRESS_DB_PASSWORD: examplepassword
-      WORDPRESS_DB_NAME: wordpress
+
 
   nginx:
-    image: nginx:stable
+    build: requirements/nginx/.
     ports:
       - "80:80"
+      - "443:443"
     volumes:
       - ./requirements/nginx/nginx.conf:/etc/nginx/nginx.conf
       - wp_data:/var/www/html
