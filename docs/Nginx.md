@@ -1,28 +1,54 @@
 # Nginx
 * Nginxはリバースプロキシ
-``
-docker container run \
---name nginx \
---rm --interactive --tty \
---publish 443:80 \
+
+```
+[コンテナ外]
+docker container run --name nginx --rm --interactive --tty --publish 443:80 \
 --mount type=bind,src=$(pwd)/requirements/nginx/conf,dst=/etc/nginx/ \
 debian:trixie \
 bash 
 
+[コンテナ内]
 apt update
 apt -y install nginx
 apt install -y openssl
-openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+openssl req -x509 -nodes -newkey \
 	-keyout /etc/ssl/certs/server.key \
 	-out /etc/ssl/certs/server.crt \
-	-subj "/C=JP/ST=Tokyo/L=Shinjyuku/O=42Tokyo/CN=mmachida.42.fr"
+	-subj "/CN=mmachida.42.fr"
 
 service nginx start
 
 ```
 
+# SSL証明書について
+通常は第三者の機関である認証局にCA証明書の発行を依頼して、そのサイトがなりすましや偽物でなく、本物であることの証明をしてもらう。
+httpsは、httpの通信を通信を暗号化したもの。
+暗号化する際に
 
+- 自己証明書
+	今回は学習用なので公的な証明書発行は依頼せず、自身のPC内のNginxコンテナ内で証明書を発行する。  
 
+- CA証明書
+	ブラウザの内部に登録されているルート証明書が証明するCAが発行している
+	- DV証明書(ドメイン認証)...無料～。ドメインの所有権のみ証明する。
+	- OV証明書(企業認証)...年間4万円～。ドメインが合法的に登録された企業のものであることを証明する。
+	- EV証明書(実在証明拡張)...年間5万円～。ガイドラインに基づきセキュリティ対策が実施されている安全なサイトかどうか審査が行ったうえで発行される。
+- [SSL/TLSサイバー証明書の基礎知識](https://www.cybertrust.co.jp/blog/ssl/knowledge/ssl-basics.html)
+
+# OpenSSLについて
+自己認証局が作れる無料のツール。他にもハッシュ化したり暗号化・復号化したり、いろいろな機能がある。
+- req...認証局に証明書を発行してもらうための申請書(CSR)の作成をするコマンド。これを認証局に送って署名してもらう。
+- x509...デジタル証明書の国際規格。これをつけることで、その場で自分で署名まで完了させて完成した証明書(x509形式)として出力する。
+- nodes...NO DES。秘密鍵をパスワードなしでつくる。これをつけないと聞かれるので自動化のために指定。
+- newkey...新しい秘密鍵を生成するオプション。つけないと既存の秘密鍵を使う前提になる。鍵の長さはデフォルトで「rsa:2048」
+- keyout...生成する秘密鍵のパスを指定するオプション。nginx.confと合わせる。
+- out...秘密鍵を保存するファイル名を指定する。デフォルトだと標準出力にしか出ない。nginx.confと合わせる。
+- subj...初期設定の内容を指定するオプション。指定しないと起動時に聞かれるので自動化のために指定。
+	- CN...発行する証明書の中に書き込む「どのホスト名に対してこの証明書が有効か」を指定するもの。この
+- [OpenSSL Command-Line HOWTO](https://nona.to/fswiki/OpenSSL+Command-Line+HOWTO.html)
+
+# 参考
 * [Ubuntu 20.04にNginxをインストールする方法](https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-20-04-ja)
 * [Official build of Nginx.](https://hub.docker.com/_/nginx)
 * [Nginx SSL/TLS設定を TLS 1.2と1.3に変更](https://arakoki70.com/?p=5781)

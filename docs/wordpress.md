@@ -28,6 +28,8 @@ docker cp ./requirements/wordpress/www.conf  wordpress:/etc/php/8.4/fpm/pool.d/w
  echo "127.0.0.1  mmachida.42.fr" >> /etc/hosts
  '''
 
+ - www-dataとは、linuxでApacheやNginxなどのwebサーバが一般的に利用するユーザグループ
+
 ## 参考サイト
 [WordPressをDockerとNginxで構築](https://job-info.hateblo.jp/entry/2024/05/09/225138)
 [The command line interface for WordPress](https://wp-cli.org/ja/)
