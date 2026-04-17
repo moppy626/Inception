@@ -2,37 +2,58 @@
 
 services:
   mariadb:
-    image: mariadb:latest
+    container_name: mariadb
+    build: requirements/mariadb/.
     volumes:
       - db_data:/var/lib/mysql
     restart: always
-    environment:
-      MARIADB_ROOT_PASSWORD: pass
-      MARIADB_DATABASE: wordpress
-      MARIADB_USER: user
-      MARIADB_PASSWORD: pass
+    env_file:
+      - .env
+      - ../secrets/db_password.txt
+      - ../secrets/db_root_password.txt
+    networks:
+      - inception
   
   wordpress:
+    container_name: wordpress
     depends_on:
       - mariadb
     build: requirements/wordpress/.
+    env_file:
+      - .env
+      - ../secrets/db_password.txt
+      - ../secrets/credentials.txt
     volumes:
-      - ./requirements/wordpress/www.conf:/etc/php/8.4/fpm/pool.d/www.conf
-      - ./requirements/wordpress/wp-config.php:/var/www/html/wp-config.php   
       - wp_data:/var/www/html
-
+    networks:
+      - inception
 
   nginx:
+    container_name: nginx
+    depends_on:
+      - wordpress
     build: requirements/nginx/.
+    env_file:
+      - .env
     ports:
       - "80:80"
       - "443:443"
     volumes:
-      - ./requirements/nginx/conf/nginx.conf:/etc/nginx/nginx.conf
       - wp_data:/var/www/html
-    depends_on:
-      - wordpress
+    networks:
+      - inception
+
+networks:
+  inception:
 
 volumes:
   db_data:
+    # driver_opts:
+    #   type:   none
+    #   o:      bind
+    #   device: "/home/mmachida/data/db_data"
   wp_data:
+    # driver_opts:
+    #   type:   none
+    #   o:      bind
+    #   device: "/home//mmachida/data/wp_data"

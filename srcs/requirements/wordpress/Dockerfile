@@ -11,4 +11,7 @@ RUN		apt update \
 		&& chown -R www-data:www-data /var/www/html \
 		&& rm -rf latest.tar.gz wordpress
 
+COPY www.conf /etc/php/8.4/fpm/pool.d/www.conf
+COPY wp-config.php /var/www/html/wp-config.php   
+
 CMD 	["/usr/sbin/php-fpm8.4", "-F"]
