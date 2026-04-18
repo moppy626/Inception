@@ -4,7 +4,7 @@
 ```
 [コンテナ外]
 docker container run --name nginx --rm --interactive --tty --publish 443:80 \
---mount type=bind,src=$(pwd)/requirements/nginx/conf,dst=/etc/nginx/ \
+--mount type=bind,src=/home/mmachida/data/wp_data,dst=/var/www/html \
 debian:trixie \
 bash 
 
@@ -12,19 +12,22 @@ bash
 apt update
 apt -y install nginx
 apt install -y openssl
-openssl req -x509 -nodes -newkey \
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
 	-keyout /etc/ssl/certs/server.key \
 	-out /etc/ssl/certs/server.crt \
-	-subj "/CN=mmachida.42.fr"
+	-subj "/C=JP/ST=Tokyo/L=Shinjyuku/O=42Tokyo/CN=mmachida.42.fr"
 
-service nginx start
+[コンテナ外]
+docker cp ./requirements/nginx/conf/nginx.conf nginx:/etc/nginx/nginx.conf
+
+[コンテナ中]
+nginx
 
 ```
 
 # SSL証明書について
 通常は第三者の機関である認証局にCA証明書の発行を依頼して、そのサイトがなりすましや偽物でなく、本物であることの証明をしてもらう。
 httpsは、httpの通信を通信を暗号化したもの。
-暗号化する際に
 
 - 自己証明書
 	今回は学習用なので公的な証明書発行は依頼せず、自身のPC内のNginxコンテナ内で証明書を発行する。  

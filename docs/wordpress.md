@@ -3,7 +3,11 @@
 
 - Dockerfile設定内容をコマンドで設定してみる
 '''
-docker container run --name wordpress --rm --interactive --tty --publish 443:80 debian:trixie bash
+[コンテナの外]
+docker container run --name wordpress --rm --interactive --tty --publish 443:80
+--mount type=bind,src=/home/mmachida/data/wp_data,dst=/var/www/html \
+ debian:trixie bash
+
 [コンテナの中]
 apt update
 apt install -y php8.4-fpm
@@ -18,6 +22,7 @@ rm -rf latest.tar.gz wordpress
 
 [コンテナの外]
 docker cp ./requirements/wordpress/www.conf  wordpress:/etc/php/8.4/fpm/pool.d/www.conf 
+docker cp  ./requirements/wordpress/wp-config.php wordpress:/var/www/html/wp-config.php
 
 [コンテナの中]
 /usr/sbin/php-fpm8.4 -F
