@@ -13,10 +13,10 @@
 BUILDFILE = ./srcs/docker-compose.yml
 
 all:
-	docker-compose -f $(BUILDFILE) up
+	docker compose -f $(BUILDFILE) up -d
 
 clean: 
-	 docker-compose -f $(BUILDFILE) down
+	 docker compose -f $(BUILDFILE) down
 
 fclean: clean
 

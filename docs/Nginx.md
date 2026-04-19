@@ -9,9 +9,9 @@ debian:trixie \
 bash 
 
 [コンテナ内]
-apt update
-apt -y install nginx
-apt install -y openssl
+apt-get update
+apt-get -y install nginx
+apt-get install -y openssl
 openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
 	-keyout /etc/ssl/certs/server.key \
 	-out /etc/ssl/certs/server.crt \

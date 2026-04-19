@@ -1,9 +1,9 @@
 FROM	debian:trixie
 
-RUN		apt update \
-		&& apt install -y php8.4-fpm \
-		&& apt install curl -y \
-		&& apt install php-mysqli -y \
+RUN		apt-get update \
+		&& apt-get install -y php8.4-fpm \
+		&& apt-get install curl -y \
+		&& apt-get install php-mysqli -y \
 		&& curl -O https://wordpress.org/latest.tar.gz \
 		&& tar xzvf latest.tar.gz \
 		&& mkdir /var/www/html -p \
