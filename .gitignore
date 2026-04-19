@@ -7,7 +7,6 @@ srcs/requirements/wordpress/wp-blog-header.php
 srcs/requirements/wordpress/wp-comments-post.php
 srcs/requirements/wordpress/wp-config-docker.php
 srcs/requirements/wordpress/wp-config-sample.php
-srcs/requirements/wordpress/wp-config.php
 srcs/requirements/wordpress/wp-cron.php
 srcs/requirements/wordpress/wp-links-opml.php
 srcs/requirements/wordpress/wp-load.php
