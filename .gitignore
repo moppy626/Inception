@@ -3184,7 +3184,7 @@ srcs/requirements/wordpress/wp-includes/SimplePie/autoloader.php
 srcs/requirements/wordpress/wp-includes/SimplePie/library/SimplePie.php
 srcs/requirements/wordpress/wp-includes/SimplePie/library/SimplePie/Author.php
 srcs/requirements/wordpress/wp-includes/SimplePie/library/SimplePie/Cache.php
-srcs/requirements/wordpress/wp-includes/SimplePie/library/SimplePie/Caption.php
+srcs/requirements/wordpress/wp-includes/SimplePie/library/SimplePie/Capt-getion.php
 srcs/requirements/wordpress/wp-includes/SimplePie/library/SimplePie/Category.php
 srcs/requirements/wordpress/wp-includes/SimplePie/library/SimplePie/Copyright.php
 srcs/requirements/wordpress/wp-includes/SimplePie/library/SimplePie/Core.php
@@ -3218,7 +3218,7 @@ srcs/requirements/wordpress/wp-includes/SimplePie/library/SimplePie/Parse/Date.p
 srcs/requirements/wordpress/wp-includes/SimplePie/library/SimplePie/XML/Declaration/Parser.php
 srcs/requirements/wordpress/wp-includes/SimplePie/src/Author.php
 srcs/requirements/wordpress/wp-includes/SimplePie/src/Cache.php
-srcs/requirements/wordpress/wp-includes/SimplePie/src/Caption.php
+srcs/requirements/wordpress/wp-includes/SimplePie/src/Capt-getion.php
 srcs/requirements/wordpress/wp-includes/SimplePie/src/Category.php
 srcs/requirements/wordpress/wp-includes/SimplePie/src/Copyright.php
 srcs/requirements/wordpress/wp-includes/SimplePie/src/Credit.php

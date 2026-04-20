@@ -19,6 +19,8 @@ define('AUTH_SALT',        getenv('AUTH_SALT'));
 define('SECURE_AUTH_SALT', getenv('SECURE_AUTH_SALT'));
 define('LOGGED_IN_SALT',   getenv('LOGGED_IN_SALT'));
 define('NONCE_SALT',       getenv('NONCE_SALT'));
+define('WP_HOME',          getenv('WORDPRESS_URL'));
+define('WP_SITEURL',       getenv('WORDPRESS_URL'));
 
 // 複数のwordpressがひとつのDBを共有するときに名前が衝突しないようにするためにテーブル名の先頭につける値
 // wordpressはこれが定義されていること前提で動いているので設定必須

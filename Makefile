@@ -6,20 +6,26 @@
 #    By: mmachida <mmachida@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/21 20:26:15 by mmachida          #+#    #+#              #
-#    Updated: 2026/04/15 22:37:04 by mmachida         ###   ########.fr        #
+#    Updated: 2026/04/20 23:13:49 by mmachida         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 BUILDFILE = ./srcs/docker-compose.yml
 
-all:
+up:
 	docker compose -f $(BUILDFILE) up -d
 
-clean: 
+down: 
 	 docker compose -f $(BUILDFILE) down
 
-fclean: clean
+build:
+	docker compose -f $(BUILDFILE) build --no-cache
 
-re: fclean all
+mariadb:
+	docker compose -f $(BUILDFILE) exec mariadb bin/bash 
 
-.PHONY: all clean fclean re
+wordpress:
+	docker compose -f $(BUILDFILE) exec wordpress bin/bash 
+
+nginx:
+	docker compose -f $(BUILDFILE) exec nginx bin/bash 

@@ -2,6 +2,7 @@
 [Ubuntu環境に作成例](https://qiita.com/office_porco/items/196d0871d68ff8b9d1e3)
 
 - Dockerfile設定内容をコマンドで設定してみる
+
 '''
 [コンテナの外]
 docker container run --name wordpress --rm --interactive --tty --publish 443:80
@@ -29,9 +30,10 @@ docker cp  ./requirements/wordpress/wp-config.php wordpress:/var/www/html/wp-con
 '''
 
 - wordpress内で設定したURLをlocalhostと認識させるために、docker実行環境のhostsファイルに書き込みが必要
+
 '''
  echo "127.0.0.1  mmachida.42.fr" >> /etc/hosts
- '''
+'''
 
  - www-dataとは、linuxでApacheやNginxなどのwebサーバが一般的に利用するユーザグループ
 

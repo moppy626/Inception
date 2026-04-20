@@ -9,16 +9,16 @@
 ### 1-1. 前提パッケージのインストール
 
 ```bash
-sudo apt-get update
-sudo apt-get install ca-certificates curl -y
+sudo apt-get-get update
+sudo apt-get-get install ca-certificates curl -y
 ```
 
 ### 1-2. Docker 公式 GPG キーの設定
 
 ```bash
-sudo install -m 0755 -d /etc/apt/keyrings
-sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
-sudo chmod a+r /etc/apt/keyrings/docker.asc
+sudo install -m 0755 -d /etc/apt-get/keyrings
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt-get/keyrings/docker.asc
+sudo chmod a+r /etc/apt-get/keyrings/docker.asc
 ```
 
 ### 1-3. Docker リポジトリの追加
@@ -28,14 +28,14 @@ echo "Types: deb
 URIs: https://download.docker.com/linux/ubuntu
 Suites: $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}")
 Components: stable
-Signed-By: /etc/apt/keyrings/docker.asc" | sudo tee /etc/apt/sources.list.d/docker.sources
+Signed-By: /etc/apt-get/keyrings/docker.asc" | sudo tee /etc/apt-get/sources.list.d/docker.sources
 ```
 
 ### 1-4. Docker のインストール
 
 ```bash
-sudo apt-get update
-sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin make -y
+sudo apt-get-get update
+sudo apt-get-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin make -y
 ```
 
 ### 1-5. ユーザーを docker グループに追加
