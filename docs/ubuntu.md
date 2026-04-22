@@ -21,3 +21,4 @@ mkdir -p /home/mmachida/data/wp_data
 
 Dockerボリュームの実体の保存場所を指定する
 - [Define and manage volumes in Docker Compose](https://docs.docker.com/reference/compose-file/volumes/)
+- [driver_optsの意味](https://stackoverflow.com/questions/74079078/what-is-the-meaning-of-the-type-o-device-flags-in-driver-opts-in-the-docker-comp)
