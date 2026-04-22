@@ -24,8 +24,8 @@ docker cp ./requirements/nginx/conf/nginx.conf nginx:/etc/nginx/nginx.conf
 nginx
 
 ```
-
-# SSL証明書について
+# SSLについて
+## SSL証明書について
 通常は第三者の機関である認証局にCA証明書の発行を依頼して、そのサイトがなりすましや偽物でなく、本物であることの証明をしてもらう。
 httpsは、httpの通信を通信を暗号化したもの。
 
@@ -39,7 +39,7 @@ httpsは、httpの通信を通信を暗号化したもの。
 	- EV証明書(実在証明拡張)...年間5万円～。ガイドラインに基づきセキュリティ対策が実施されている安全なサイトかどうか審査が行ったうえで発行される。
 - [SSL/TLSサイバー証明書の基礎知識](https://www.cybertrust.co.jp/blog/ssl/knowledge/ssl-basics.html)
 
-# OpenSSLについて
+## OpenSSLについて
 自己認証局が作れる無料のツール。他にもハッシュ化したり暗号化・復号化したり、いろいろな機能がある。
 - req...認証局に証明書を発行してもらうための申請書(CSR)の作成をするコマンド。これを認証局に送って署名してもらう。
 - x509...デジタル証明書の国際規格。これをつけることで、その場で自分で署名まで完了させて完成した証明書(x509形式)として出力する。
@@ -51,10 +51,25 @@ httpsは、httpの通信を通信を暗号化したもの。
 	- CN...発行する証明書の中に書き込む「どのホスト名に対してこの証明書が有効か」を指定するもの。この
 - [OpenSSL Command-Line HOWTO](https://nona.to/fswiki/OpenSSL+Command-Line+HOWTO.html)
 
-# 参考
-* [Ubuntu 20.04にNginxをインストールする方法](https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-20-04-ja)
-* [Official build of Nginx.](https://hub.docker.com/_/nginx)
+## 参考
 * [Nginx SSL/TLS設定を TLS 1.2と1.3に変更](https://arakoki70.com/?p=5781)
 * [nginx連載6回目: nginxの設定、その4 - TLS/SSLの設定](https://heartbeats.jp/hbblog/2012/06/nginx06.html)
-* [nginx ドキュメント日本語訳](https://mogile.web.fc2.com/nginx/docs/)
 * [Nginxの自己署名証明書によるHTTPS化](https://kkspecial.hatenablog.com/entry/2025/09/14/223630)
+
+# nginx.confについて
+- try_files $uri $uri/ /index.php?$args;
+	最初に$uriというファイルがあるか探し、次にディレクトリとして探し、なければindex.phpを返す
+- location ~ \.php$
+	拡張子が.phpだったらすべて当てはまる
+- include fastcgi_params;
+	FastCGI の環境変数を設定するファイル (/etc/nginx/fastcgi_params) を読み込みます。
+	fastcgi_paramでここに足りない変数を追加します。
+	- SCRIPT_FILENAME:どのPHPファイルを動かすか
+	- PATH_INFO:その後ろの情報
+- fastcgi_pass wordpress:9000;
+	wordpressコンテナのPHP-FPMデフォルト待ち受けポートに転送
+## 参考
+* [Ubuntu 20.04にNginxをインストールする方法](https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-20-04-ja)
+* [Official build of Nginx.](https://hub.docker.com/_/nginx)
+* [nginx ドキュメント日本語訳](https://mogile.web.fc2.com/nginx/docs/)
+* [入門 - Nginx + PHP-FPM の仕組み](https://zenn.dev/azunyan/articles/0dad881616063b)
