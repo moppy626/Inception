@@ -1,8 +1,7 @@
-# version: "3.8"
-
 services:
   mariadb:
     container_name: mariadb
+    image: mariadb
     build: requirements/mariadb/.
     volumes:
       - db_data:/var/lib/mysql
@@ -16,6 +15,7 @@ services:
   
   wordpress:
     container_name: wordpress
+    image: wordpress
     depends_on:
       - mariadb
     build: requirements/wordpress/.
@@ -30,14 +30,15 @@ services:
 
   nginx:
     container_name: nginx
+    image: nginx
     depends_on:
       - wordpress
     build: requirements/nginx/.
     env_file:
       - .env
     ports:
-      - "80:80"
-      - "443:443"
+          - "80:80"
+          - "443:443"
     volumes:
       - wp_data:/var/www/html
     networks:
@@ -48,12 +49,12 @@ networks:
 
 volumes:
   db_data:
-    #  driver_opts:
-    #    type:   none
-    #    o:      bind
-    #    device: "/home/mmachida/data/db_data"
+      driver_opts:
+        type:   none
+        o:      bind
+        device: "/home/mmachida/data/db_data"
   wp_data:
-    #  driver_opts:
-    #    type:   none
-    #    o:      bind
-    #    device: "/home/mmachida/data/wp_data"
+      driver_opts:
+        type:   none
+        o:      bind
+        device: "/home/mmachida/data/wp_data"

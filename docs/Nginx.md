@@ -3,7 +3,7 @@
 
 ```
 [コンテナ外]
-docker container run --name nginx --rm --interactive --tty --publish 443:80 \
+docker container run --name nginx --rm --interactive --tty --publish 443:443 \
 --mount type=bind,src=/home/mmachida/data/wp_data,dst=/var/www/html \
 debian:trixie \
 bash 

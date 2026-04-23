@@ -1,4 +1,4 @@
-FROM	debian:trixie
+FROM	debian:bookworm
 
 COPY	tools/init_mariadb.sh /init_mariadb.sh
 COPY	conf/my.conf /etc/mysql/my.cnf

@@ -1,4 +1,4 @@
-FROM	debian:trixie
+FROM	debian:bookworm
 
 RUN		apt-get update \
 		&& apt-get install -y php8.4-fpm \
@@ -7,7 +7,7 @@ RUN		apt-get update \
 		&& curl -O https://wordpress.org/latest.tar.gz \
 		&& tar xzvf latest.tar.gz \
 		&& mkdir /var/www/html -p \
-		&& mv wordpress/* /var/www/html \
+		&& mv wordpress/* /var/www/html -n \
 		&& chown -R www-data:www-data /var/www/html \
 		&& rm -rf latest.tar.gz wordpress
 

@@ -5,7 +5,7 @@
 
 '''
 [コンテナの外]
-docker container run --name wordpress --rm --interactive --tty --publish 443:80
+docker container run --name wordpress --rm --interactive --tty --publish 443:80 \
 --mount type=bind,src=/home/mmachida/data/wp_data,dst=/var/www/html \
  debian:trixie bash
 
@@ -17,7 +17,7 @@ apt-get install php-mysqli -y
 curl -O https://wordpress.org/latest.tar.gz
 tar xzvf latest.tar.gz
 mkdir /var/www/html -p
-mv wordpress/* /var/www/html
+mv wordpress/* /var/www/html -n
 chown -R www-data:www-data /var/www/html
 rm -rf latest.tar.gz wordpress
 

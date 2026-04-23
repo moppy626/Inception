@@ -13,6 +13,8 @@
 BUILDFILE = ./srcs/docker-compose.yml
 
 up:
+	mkdir -p /home/mmachida/data/db_data
+	mkdir -p /home/mmachida/data/wp_data
 	docker compose -f $(BUILDFILE) up -d
 
 down: 
