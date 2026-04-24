@@ -11,7 +11,7 @@ docker container run --name wordpress --rm --interactive --tty --publish 443:80 
 
 [コンテナの中]
 apt-get update
-apt-get install -y php8.4-fpm
+apt-get install -y php8.2-fpm
 apt-get install curl -y
 apt-get install php-mysqli -y
 curl -O https://wordpress.org/latest.tar.gz
@@ -22,11 +22,11 @@ chown -R www-data:www-data /var/www/html
 rm -rf latest.tar.gz wordpress
 
 [コンテナの外]
-docker cp ./requirements/wordpress/www.conf  wordpress:/etc/php/8.4/fpm/pool.d/www.conf 
+docker cp ./requirements/wordpress/www.conf  wordpress:/etc/php/8.2/fpm/pool.d/www.conf 
 docker cp  ./requirements/wordpress/wp-config.php wordpress:/var/www/html/wp-config.php
 
 [コンテナの中]
-/usr/sbin/php-fpm8.4 -F
+/usr/sbin/php-fpm8.2 -F
 '''
 
 - wordpress内で設定したURLをlocalhostと認識させるために、docker実行環境のhostsファイルに書き込みが必要

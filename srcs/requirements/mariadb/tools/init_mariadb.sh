@@ -2,12 +2,12 @@
 
 if [ ! -d "/var/lib/mysql/$DB_NAME" ]; then
 
-	cnt = 0
+	cnt=0
 	mysqld --user=mysql &
-	while cnt < 100 && ! mariadb -u root -p"$MYSQL_ROOT_PASSWORD" -e "SELECT 1;" > /dev/null 2>&1
+	while (($cnt < 100)) && ! mariadb -u root -p"$MYSQL_ROOT_PASSWORD" -e "SELECT 1;" > /dev/null 2>&1
 	do
 		sleep 1
-		cnt++
+		cnt=$((cnt + 1))
 	done
 
 	mariadb -u root -p"$MYSQL_ROOT_PASSWORD" -e "CREATE DATABASE IF NOT EXISTS $DB_NAME;"
