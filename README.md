@@ -18,3 +18,10 @@ The procedure is described in detail in [USER_DOC.md](./USER_DOC.md)
 - [Nginx.md](./docs/Nginx.md)
 - [ubuntu.md](./docs/ubuntu.md)
 - [wordpress.md](./docs/wordpress.md)
+
+## Virtual Machines vs Docker
+- Virtual Machines vs Docker
+
+- Secrets vs Environment Variables
+- Docker Network vs Host Network
+- Docker Volumes vs Bind Mounts

@@ -11,11 +11,18 @@
 # **************************************************************************** #
 
 BUILDFILE = ./srcs/docker-compose.yml
+LOCALPATH = /home/mmachida/data/
+
+all: build prepare up
+
+prepare:
+	- @mkdir -p $(LOCALPATH)db_data
+	- @mkdir -p $(LOCALPATH)wp_data
+	- @sudo chmod -R 755 $(LOCALPATH)db_data
+	- @sudo chmod -R 755 $(LOCALPATH)wp_data
 
 up:
-	mkdir -p /home/mmachida/data/db_data
-	mkdir -p /home/mmachida/data/wp_data
-	docker compose -f $(BUILDFILE) up -d
+	docker compose -f $(BUILDFILE) up
 
 down: 
 	 docker compose -f $(BUILDFILE) down
@@ -31,3 +38,16 @@ wordpress:
 
 nginx:
 	docker compose -f $(BUILDFILE) exec nginx bin/bash 
+
+clear:
+	- docker compose -f $(BUILDFILE) down -v>/dev/null 2>&1
+	- docker stop $(docker ps -qa)>/dev/null 2>&1
+	- docker rm $(docker ps -qa)>/dev/null 2>&1
+	- docker rmi -f $(docker images -qa)>/dev/null 2>&1
+	- docker volume rm $(docker volume ls -q)>/dev/null 2>&1
+	- docker network rm $(docker network ls -q)>/dev/null 2>&1
+	- sudo rm -rf $(LOCALPATH)db_data/*>/dev/null 2>&1
+	- sudo rm -rf $(LOCALPATH)wp_data/*>/dev/null 2>&1
+
+test:
+	curl -k https://mmachida.42.fr

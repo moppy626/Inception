@@ -25,6 +25,7 @@ services:
       - ../secrets/credentials.txt
     volumes:
       - wp_data:/var/www/html
+    restart: always
     networks:
       - inception
 
@@ -37,24 +38,25 @@ services:
     env_file:
       - .env
     ports:
-          - "80:80"
           - "443:443"
     volumes:
       - wp_data:/var/www/html
+    restart: always
     networks:
       - inception
 
 networks:
   inception:
+    name: inception
 
 volumes:
   db_data:
-      # driver_opts:
-      #   type:   none
-      #   o:      bind
-      #   device: "/home/mmachida/data/db_data"
+       driver_opts:
+         type:   none
+         o:      bind
+         device: "/home/mmachida/data/db_data"
   wp_data:
-      # driver_opts:
-      #   type:   none
-      #   o:      bind
-      #   device: "/home/mmachida/data/wp_data"
+       driver_opts:
+         type:   none
+         o:      bind
+         device: "/home/mmachida/data/wp_data"

@@ -14,4 +14,4 @@ RUN		apt-get update \
 COPY www.conf /etc/php/8.2/fpm/pool.d/www.conf
 COPY wp-config.php /var/www/html/wp-config.php   
 
-CMD 	["/usr/sbin/php-fpm8.4", "-F"]
+CMD 	["/usr/sbin/php-fpm8.2", "-F"]
