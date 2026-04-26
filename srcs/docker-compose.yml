@@ -1,7 +1,7 @@
 services:
   mariadb:
     container_name: mariadb
-    image: mariadb
+    image: mariadb:inception
     build: requirements/mariadb/.
     volumes:
       - db_data:/var/lib/mysql
@@ -16,7 +16,7 @@ services:
   
   wordpress:
     container_name: wordpress
-    image: wordpress
+    image: wordpress:inception
     depends_on:
       - mariadb
     build: requirements/wordpress/.
@@ -30,10 +30,11 @@ services:
     secrets:
       - db_password
       - credentials
+      - db_root_password
 
   nginx:
     container_name: nginx
-    image: nginx
+    image: nginx:inception
     depends_on:
       - wordpress
     build: requirements/nginx/.
@@ -53,15 +54,15 @@ networks:
 
 volumes:
   db_data:
-       driver_opts:
-         type:   none
-         o:      bind
-         device: "/home/mmachida/data/db_data"
+      #  driver_opts:
+      #    type:   none
+      #    o:      bind
+      #    device: "/home/mmachida/data/db_data"
   wp_data:
-       driver_opts:
-         type:   none
-         o:      bind
-         device: "/home/mmachida/data/wp_data"
+      #  driver_opts:
+      #    type:   none
+      #    o:      bind
+      #    device: "/home/mmachida/data/wp_data"
 secrets:
   credentials:
     file: ../secrets/credentials.txt

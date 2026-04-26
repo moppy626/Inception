@@ -2,7 +2,7 @@
 
 cnt=0
 mysqld --user=mysql &
-while ! mysqladmin ping -h localhost -u root -p"$(cat /run/secrets/db_root_password)"
+while [ "$cnt" -lt 100 ] && ! mysqladmin ping -h localhost -u root -p"$(cat /run/secrets/db_root_password)"
 do
 	sleep 1
 	cnt=$((cnt + 1))

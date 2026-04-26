@@ -6,7 +6,7 @@
 #    By: mmachida <mmachida@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/21 20:26:15 by mmachida          #+#    #+#              #
-#    Updated: 2026/04/20 23:13:49 by mmachida         ###   ########.fr        #
+#    Updated: 2026/04/26 21:57:03 by mmachida         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,7 @@ wordpress:
 nginx:
 	docker compose -f $(BUILDFILE) exec nginx bin/bash 
 
-clear:
+clean:
 	- docker compose -f $(BUILDFILE) down -v>/dev/null 2>&1
 	- docker stop $(docker ps -qa)>/dev/null 2>&1
 	- docker rm $(docker ps -qa)>/dev/null 2>&1
