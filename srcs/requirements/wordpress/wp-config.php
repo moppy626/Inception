@@ -3,7 +3,7 @@
 // DB接続情報
 define( 'DB_NAME', getenv('DB_NAME') );
 define( 'DB_USER', getenv('DB_USER') );
-define( 'DB_PASSWORD', getenv('DB_PASSWORD') );
+define( 'DB_PASSWORD', trim(file_get_contents('/run/secrets/db_password')) );
 define( 'DB_HOST', getenv('DB_HOST') );
 define( 'DB_CHARSET', getenv('DB_CHARSET') ?: 'utf8mb4' );
 define( 'DB_COLLATE', getenv('DB_COLLATE') ?: '' );
@@ -11,14 +11,16 @@ define( 'DB_COLLATE', getenv('DB_COLLATE') ?: '' );
 // https://api.wordpress.org/secret-key/1.1/salt/で発行した認証用ユニークキー
 // ここから生成した値をユーザーのcookieに入れて再ログインの時に送ってもらうことで、
 // ユーザー情報が偽装されていないことを証明することができる
-define('AUTH_KEY',         getenv('AUTH_KEY'));
-define('SECURE_AUTH_KEY',  getenv('SECURE_AUTH_KEY'));
-define('LOGGED_IN_KEY',    getenv('LOGGED_IN_KEY'));
-define('NONCE_KEY',        getenv('NONCE_KEY'));
-define('AUTH_SALT',        getenv('AUTH_SALT'));
-define('SECURE_AUTH_SALT', getenv('SECURE_AUTH_SALT'));
-define('LOGGED_IN_SALT',   getenv('LOGGED_IN_SALT'));
-define('NONCE_SALT',       getenv('NONCE_SALT'));
+define('AUTH_KEY',         trim(file_get_contents('/run/secrets/credentials')));
+define('SECURE_AUTH_KEY',  trim(file_get_contents('/run/secrets/credentials')));
+define('LOGGED_IN_KEY',    trim(file_get_contents('/run/secrets/credentials')));
+define('NONCE_KEY',        trim(file_get_contents('/run/secrets/credentials')));
+define('AUTH_SALT',        trim(file_get_contents('/run/secrets/credentials')));
+define('SECURE_AUTH_SALT', trim(file_get_contents('/run/secrets/credentials')));
+define('LOGGED_IN_SALT',   trim(file_get_contents('/run/secrets/credentials')));
+define('NONCE_SALT',       trim(file_get_contents('/run/secrets/credentials')));
+
+// 自動でリダイレクトするページのURLを指定する
 define('WP_HOME',          getenv('WORDPRESS_URL'));
 define('WP_SITEURL',       getenv('WORDPRESS_URL'));
 
