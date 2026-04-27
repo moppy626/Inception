@@ -16,9 +16,10 @@ COPY 	www.conf /etc/php/8.2/fpm/pool.d/www.conf
 COPY 	wp-config.php /var/www/html/wp-config.php   
 COPY	init_wordpress.sh /init_wordpress.sh
 
-RUN		curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar 
-RUN		chmod +x wp-cli.phar 
-RUN		mv wp-cli.phar /usr/local/bin/wp 
-RUN		chmod +x /init_wordpress.sh
+RUN		curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar  \
+		&& chmod +x wp-cli.phar  \
+		&& mv wp-cli.phar /usr/local/bin/wp  \
+		&& chmod +x /init_wordpress.sh
+		&& rm -rf /var/lib/apt/lists/*
 
-CMD ["./init_wordpress.sh"]
+ENTRYPOINT ["./init_wordpress.sh"]

@@ -7,6 +7,7 @@ RUN		apt-get update \
 			-keyout /etc/ssl/certs/server.key \
 			-out /etc/ssl/certs/server.crt \
 			-subj "/C=JP/ST=Tokyo/L=Shinjyuku/O=42Tokyo/CN=$DOMAIN_NAME"			
+ 		&& rm -rf /var/lib/apt/lists/*
 
 COPY	conf/nginx.conf /etc/nginx/nginx.conf
 
