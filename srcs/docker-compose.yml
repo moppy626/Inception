@@ -2,7 +2,7 @@ services:
   mariadb:
     container_name: mariadb
     image: mariadb:inception
-    build: requirements/mariadb/.
+    build: requirements/mariadb/.network
     volumes:
       - db_data:/var/lib/mysql
     restart: always

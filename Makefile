@@ -21,11 +21,29 @@ prepare:
 	- @sudo chmod -R 755 $(LOCALPATH)db_data
 	- @sudo chmod -R 755 $(LOCALPATH)wp_data
 
+pass:
+	if [ ! -d secrets ]; then \
+		mkdir secrets; \
+	fi; \
+	if [ ! -e secrets/credentials.txt ]; then \
+		echo "WP_ADMIN_PASS=$$(more /dev/urandom  | tr -d -c '[:alnum:]' | fold -w 10 | head -1)" > secrets/credentials.txt; \
+		echo "WP_PASS=$$(more /dev/urandom  | tr -d -c '[:alnum:]' | fold -w 10 | head -1)" >> secrets/credentials.txt; \
+	fi; \
+	if [ ! -e secrets/db_password.txt ]; then \
+		echo $$(more /dev/urandom  | tr -d -c '[:alnum:]' | fold -w 10 | head -1) > secrets/db_password.txt; \
+	fi; \
+	if [ ! -e secrets/db_root_password.txt ]; then \
+		echo $$(more /dev/urandom  | tr -d -c '[:alnum:]' | fold -w 10 | head -1) > secrets/db_root_password.txt; \
+	fi; \
+	
 up:
 	docker compose -f $(BUILDFILE) up
 
+stop:
+	 docker compose -f $(BUILDFILE) stop
+
 down: 
-	 docker compose -f $(BUILDFILE) down
+	 docker compose -f $(BUILDFILE) down --rmi all
 
 build:
 	docker compose -f $(BUILDFILE) build --no-cache

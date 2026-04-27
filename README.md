@@ -7,17 +7,17 @@ Detailed configuration instructions are provided in [DEV_DOC.md](./DEV_DOC.md).
 ## Instructions
 The procedure is described in detail in [USER_DOC.md](./USER_DOC.md)
 
-## AI Usage
-- Translation
-- List the elements to study for this assignment
-- Troubleshooting When Issues Occur
-
 ## Resources
 - [DockerでWordpress構築ハンズオン](https://zenn.dev/justhiro/articles/c454cc1fbc784e)
 - [mariadb.md](./docs/mariadb.md)
 - [Nginx.md](./docs/Nginx.md)
 - [ubuntu.md](./docs/ubuntu.md)
 - [wordpress.md](./docs/wordpress.md)
+
+### AI Usage
+- Translation
+- List the elements to study for this assignment
+- Troubleshooting When Issues Occur
 
 ## Topic Questions
 - Virtual Machines vs Docker

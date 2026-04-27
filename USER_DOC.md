@@ -3,14 +3,32 @@
 ## Description
 This is a website development tool that uses Docker, Nginx, WordPress, and MariaDB.
 
-## How To Use
-1. Please clone this Git repository into an environment that has Docker installed.
-2. Please place the file containing the database password and authentication key in the “secrets” folder directly under the git directory.
-3. Run the “make” command in the directory directly under the repository. This will start each Docker container.
-4. Access https://mmachida.42.fr:443. The WordPress dashboard will appear in your browser.
-5. When you launch the app for the first time, a language selection screen will appear; please follow the on-screen instructions to complete the initial setup.
-6. If this is your second or subsequent startup (and MariaDB has already been configured), the site menu will be displayed.
-7. To stop the process, run “make clean” in the folder directly under Git. This will delete all created containers. (DB data will not be deleted, as it is stored on a local volume.)
+## How to start and stop
+- Run the ‘make’ command in the directory directly under the repository. This will start each Docker container.
+- To stop the process, run ‘make down’ in the folder directly under Git. This will remove all created containers.
+
+## Available Pages
+- Visit https://mmachida.42.fr:443. The WordPress dashboard will appear in your browser.
+    - Edit Profile... You can edit your password, email address, nickname, etc.
+    - Post Articles... You can post and edit articles only if you have the necessary permissions
+    - Upload Media... You can upload media only if you have the necessary permissions
+    - View Comments
+
+- You can access the admin pages at https://mmachida.42.fr:443/wp-admin/. 
+    - Dashboard... You can check for new updates
+    - Updates... You can check for and manage updates for WordPress core, themes, plugins, etc.
+    - Posts... You can create, edit and publish posts
+    - Media... You can manage files such as images
+    - Comments... You can manage comments
+    - Appearance... You can install and edit design templates
+    - Plugins... You can manage extensions
+    - Tools... You can import and export various data
+
+## Credentials
+Please refer to the ‘secrets’ folder for the login password
+The ‘credentials.txt’ file contains the passwords for WordPress users
+- WP_ADMIN_PASS... WordPress administrator
+- WP_PASS... WordPress user with write permissions
 
 ## Info
 - [【絶対やっておくべき！】WordPressの初期設定を徹底解説](https://www.conoha.jp/lets-wp/wp-setting/)

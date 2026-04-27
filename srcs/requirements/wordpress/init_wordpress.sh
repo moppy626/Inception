@@ -3,7 +3,7 @@
 . /run/secrets/credentials
 
 cnt=0
-while [ "$cnt" -lt 100 ] && ! mysqladmin ping -h mariadb --silent
+while [ "$cnt" -lt 100 ] && ! mysqladmin ping -h mariadb:3306 --silent
 do
 	sleep 1
 	cnt=$((cnt + 1))

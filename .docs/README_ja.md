@@ -1,11 +1,25 @@
+*This project has been created as part of the 42 curriculum by mmachida*
 
-- restart: always
-	OSを起動したら自動でコンテナが立ち上がるようにする設定
-	デフォルトはno。on-failureはエラー終了のときだけ、unless-stoppedはOSを終了したときの状態にする
+## Description
+この課題では、Docker、MariaDB、WordPress、およびNginxを使用してウェブサイトを構築します。これらのコンテナ用の公式イメージファイルは利用可能ですが、既存のものは一切使用せず、AlpineまたはDebianを使用して一から構築する必要があります。
+詳細な設定手順は[DEV_DOC.md](./DEV_DOC.md)に記載されています。
 
-- [Dockerfile を書くベストプラクティス](https://docs.docker.jp/develop/develop-images/dockerfile_best-practices.html)
+## Instructions
+詳細は [USER_DOC.md](./USER_DOC.md) に記載してあります
 
+## AI Usage
+- 翻訳
+- この課題で学習すべき項目の一覧化
+- 問題が起きたときのトラブルシューティング
 
+## Resources
+- [DockerでWordpress構築ハンズオン](https://zenn.dev/justhiro/articles/c454cc1fbc784e)
+- [mariadb.md](./docs/mariadb.md)
+- [Nginx.md](./docs/Nginx.md)
+- [ubuntu.md](./docs/ubuntu.md)
+- [wordpress.md](./docs/wordpress.md)
+
+## Topic Questions
 - Virtual Machines vs Docker
 Dockerは使用したいアプリとそれが依存する環境を「コンテナ」としてひとまとめにして、それを複数管理できるようにするツールです。
 アプリケーションごとに環境やボリュームを作るので、それらを他のアプリケーションに影響することなく、簡単に削除したり再作成することができます。またDockerHubを通じて世界中の開発者と同じ構成を共有することもできます。
@@ -15,18 +29,21 @@ Dockerは使用したいアプリとそれが依存する環境を「コンテ�
 namespaces...プロセスIDやネットワーク、ファイルシステムを“別室”から見えるように偽装
 cgroups...CPUやメモリを「この部屋は1コアまで」「この部屋は512MBまで」と決める仕組み
 
+
 - Secrets vs Environment Variables
 SSHキーやパスワードをリポジトリの外に配置しつつ、ビルドの際にコンテナに伝える手段として環境変数は便利ですが、そのままではアクセス権を持つ人であれば平文を確認できてしまいます。また誰がアクセスしたかを追跡することが困難で、子プロセスに引き継がれてしまいます。docker inspectsで見ることもできてしまいます。
 DockerSecretsはファイルを設定しておくとビルド時に「/run/secrets」フォルダにマウントされ、ルート権限がなければファイルにアクセスすることができなくなっています。
+
+[Dockerシークレットとは？](https://www.sysdig.com/jp/learn-cloud-native/what-are-docker-secrets)
 
 - Docker Network vs Host Network
 Dockerを立ち上げた際にコンテナがデフォルトで設定されるのは、ブリッジネットワークです。デフォルトの設定ではDockerEngine上のすべてのコンテナと通信できる場所に接続され、コンテナ間の通信はIPアドレスで行う必要があります。一方で、自分で名前をつけたネットワークを作成し、対象のコンテナに設定すると、対象外のコンテナからはアクセスできなくなり、コンテナ間の通信をする際にコンテナ名でも通信をすることができるようになります。docker-composeで作成したコンテナは自動的にそのファイル内でのブリッジネットワークが作られます。
 一方で、docker runで「--network host」というオプションをつけてホストネットワークを指定すると、コンテナはホスト側とネットワークを共有するようになります。この時、コンテナはIPアドレスを割り当てられず、ホストのアドレスの指定したポート番号を使用するようになります。ネットワークの速度が必要だったり、ホストのポートを直接使用したい場合などに有効です。
 
-
-[Dockerと仮想マシンの違いは？メリット・デメリットと使い分けを徹底比較](https://www.tomorrow-net.co.jp/topic/topic-blog-20250806/)
+[ホスト・ネットワークの使用](https://docs.docker.jp/network/host.html)
 
 - Docker Volumes vs Bind Mounts
 ボリュームはDockerが作成・管理してくれるデータの保管場所です。これをコンテナのフォルダに割り当てることにより、コンテナを立ち上げ直してもデータを保持し続けられるようになります。作成したボリュームを複数のコンテナに設定することにより、同じ内容を複数のコンテナから見るようにすることもできます。dockerが提供するコマンドで簡単に削除して作り直すこともできます。
 一方でバインドマウントは、ホスト側の任意のフォルダやファイルをコンテナのフォルダやファイルに紐付けることができる機能です。内容が共有されているので、ホスト側とコンテナ側一方のファイルに対する変更がもう一方にも反映されます。ソースコードのディレクトリをコンテナにバインドマウントしてホストマシン側と共有すれば、ホストマシンでコードを変更した際に同期や転送が不要になります。
 
+[Dockerと仮想マシンの違いは？メリット・デメリットと使い分けを徹底比較](https://www.tomorrow-net.co.jp/topic/topic-blog-20250806/)
