@@ -3421,3 +3421,7 @@ srcs/requirements/wordpress/wp-includes/widgets/class-wp-widget-rss.php
 srcs/requirements/wordpress/wp-includes/widgets/class-wp-widget-search.php
 srcs/requirements/wordpress/wp-includes/widgets/class-wp-widget-tag-cloud.php
 srcs/requirements/wordpress/wp-includes/widgets/class-wp-widget-text.php
+secrets/credentials.txt
+.gitignore
+secrets/db_password.txt
+secrets/db_root_password.txt

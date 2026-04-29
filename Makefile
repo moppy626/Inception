@@ -58,6 +58,7 @@ nginx:
 	docker compose -f $(BUILDFILE) exec nginx bin/bash 
 
 clean:
+	- docker system prune
 	- docker compose -f $(BUILDFILE) down -v>/dev/null 2>&1
 	- docker stop $(docker ps -qa)>/dev/null 2>&1
 	- docker rm $(docker ps -qa)>/dev/null 2>&1

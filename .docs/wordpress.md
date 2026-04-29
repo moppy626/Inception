@@ -46,6 +46,35 @@ docker cp  ./requirements/wordpress/wp-config.php wordpress:/var/www/html/wp-con
 
  - www-dataとは、linuxでApacheやNginxなどのwebサーバが一般的に利用するユーザグループ
 
+ ## www.conf
+ ```
+ [www]
+# 参考) https://www.php.net/manual/ja/install.fpm.configuration.php
+# PHP-FPM プロセスを実行するユーザーとグループ。セキュリティやファイル権限の管理で使用される
+user = www-data
+group = www-data
+# PHP-FPM がリクエストを受け付けるIPとポート。nginx.confの設定と合わせる
+listen = 0.0.0.0:9000
+listen.owner = www-data
+listen.group = www-data
+# プロセス数をリクエストに応じて増減させる（single dynamic static のいずれか）
+pm = dynamic
+# 同時に処理できる子プロセスの上限。PHP-FPMは、事前に起動しておいた子プロセス（PHP実行担当）がリクエストを処理する。
+pm.max_children = 5
+# PHP-FPM 起動時に、最初に立ち上げる子プロセスの数。
+pm.start_servers = 2
+# 待機中子プロセスの最小数。少なすぎる場合は自動で増やされる
+pm.min_spare_servers = 1
+# 待機中の子プロセスの最大数。多すぎる場合は自動で減らされる
+pm.max_spare_servers = 3
+# FastCGI の statusリクエスト を受け付けるアドレス
+pm.status_listen = wordpress:9001
+# ワーカーの標準出力および標準エラー出力を本体のエラーログにリダイレクトします
+catch_workers_output = yes
+# 任意の環境変数が FPM ワーカープロセスに到達してしまうことを防ぐために、 ワーカー内の環境をいったんクリアしてから、このプールの設定で指定された環境変数を追加します
+clear_env = no
+```
+
 ## 参考サイト
 [WordPressをDockerとNginxで構築](https://job-info.hateblo.jp/entry/2024/05/09/225138)
 [The command line interface for WordPress](https://wp-cli.org/ja/)

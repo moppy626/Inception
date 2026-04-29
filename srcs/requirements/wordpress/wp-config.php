@@ -4,7 +4,7 @@
 define( 'DB_NAME', getenv('DB_NAME') );
 define( 'DB_USER', getenv('DB_USER') );
 define( 'DB_PASSWORD', trim(file_get_contents('/run/secrets/db_password')) );
-define( 'DB_HOST', getenv('DB_HOST') );
+define( 'DB_HOST', getenv('DB_HOST'));
 define( 'DB_CHARSET', getenv('DB_CHARSET') ?: 'utf8mb4' );
 define( 'DB_COLLATE', getenv('DB_COLLATE') ?: '' );
 

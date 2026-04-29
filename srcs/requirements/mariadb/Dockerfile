@@ -8,7 +8,7 @@ RUN		apt-get update \
 COPY	conf/my.conf /etc/mysql/my.cnf
 
 COPY	tools/init_mariadb.sh /init_mariadb.sh
-RUN		chmod +x /init_mariadb.sh
+RUN		chmod +x /init_mariadb.sh \
  		&& rm -rf /var/lib/apt/lists/*
 
 ENTRYPOINT ["/init_mariadb.sh"]

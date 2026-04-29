@@ -2,7 +2,7 @@ services:
   mariadb:
     container_name: mariadb
     image: mariadb:inception
-    build: requirements/mariadb/.network
+    build: requirements/mariadb/.
     volumes:
       - db_data:/var/lib/mysql
     restart: always
@@ -54,15 +54,15 @@ networks:
 
 volumes:
   db_data:
-      #  driver_opts:
-      #    type:   none
-      #    o:      bind
-      #    device: "/home/mmachida/data/db_data"
+       driver_opts:
+         type:   none
+         o:      bind
+         device: "/home/mmachida/data/db_data"
   wp_data:
-      #  driver_opts:
-      #    type:   none
-      #    o:      bind
-      #    device: "/home/mmachida/data/wp_data"
+       driver_opts:
+         type:   none
+         o:      bind
+         device: "/home/mmachida/data/wp_data"
 secrets:
   credentials:
     file: ../secrets/credentials.txt
