@@ -3,7 +3,7 @@
 . /run/secrets/credentials
 
 cnt=0
-while [ "$cnt" -lt 100 ] && ! mysqladmin ping -h mariadb -P 3306 -u $WP_USER -p"$(cat /run/secrets/db_root_password)" --silent 2>/dev/null
+while [ "$cnt" -lt 100 ] && ! mysqladmin ping -h mariadb -P 3306 -u $DB_USER -p"$(cat /run/secrets/db_password)" --silent 2>/dev/null
 do
 	sleep 1
 	cnt=$((cnt + 1))
