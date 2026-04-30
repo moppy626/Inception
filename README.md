@@ -4,22 +4,6 @@
 In this assignment, you will build a website using Docker, MariaDB, WordPress, and Nginx. While official image files are available for these containers, you must not use any pre-existing ones; instead, you must build them from scratch using Alpine or Debian.
 Detailed configuration instructions are provided in [DEV_DOC.md](./DEV_DOC.md).
 
-## Instructions
-The procedure is described in detail in [USER_DOC.md](./USER_DOC.md)
-
-## Resources
-- [DockerでWordpress構築ハンズオン](https://zenn.dev/justhiro/articles/c454cc1fbc784e)
-- [mariadb.md](./docs/mariadb.md)
-- [Nginx.md](./docs/Nginx.md)
-- [ubuntu.md](./docs/ubuntu.md)
-- [wordpress.md](./docs/wordpress.md)
-
-### AI Usage
-- Translation
-- List the elements to study for this assignment
-- Troubleshooting When Issues Occur
-
-## Topic Questions
 - Virtual Machines vs Docker
 Docker is a tool that bundles the application you want to use and its dependent environment into a single “container,” allowing you to manage multiple containers.
 Since environments and volumes are created for each application, you can easily delete or recreate them without affecting other applications. You can also share the same configuration with developers around the world via Docker Hub.
@@ -41,3 +25,27 @@ On the other hand, if you specify the host network using the `--network host` op
 - Docker Volumes vs Bind Mounts
 Docker volume is a data storage location created and managed by Docker. By mounting it to a container’s directory, data is preserved even if the container is restarted. You can also configure a created volume for multiple containers, allowing multiple containers to access the same data. Volumes can be easily deleted and recreated using Docker commands.
 On the other hand, a bind mount is a feature that allows you to link any folder or file on the host machine to a folder or file within a container. Since the contents are shared, changes made to a file on either the host or the container will be reflected on the other side. If you bind-mount a source code directory to a container to share it with the host machine, you won’t need to synchronize or transfer files when you make changes to the code on the host machine.
+
+
+## Instructions
+1. Clone this Git repository to a system where Docker is installed.
+2. Place the file containing the database password in the ‘secrets’ folder located directly under the git directory.
+Alternatively, run ```make pass``` to generate a new random password.
+3. Run the ‘make’ command in the directory directly under the repository. This will start the Docker containers.
+4. Go to https://mmachida.42.fr:443. The WordPress dashboard will appear in your browser. Try posting a message on the forum.
+5. You can access the admin page at https://mmachida.42.fr:443/wp-admin/. 
+6. To stop the process, run `make down` in the directory directly under Git. This will remove all created containers.
+7. Please verify that the data you created remains intact even after restarting the containers or shutting down the host PC.
+
+## Resources
+- [DockerでWordpress構築ハンズオン](https://zenn.dev/justhiro/articles/c454cc1fbc784e)
+- [mariadb.md](./docs/mariadb.md)
+- [Nginx.md](./docs/Nginx.md)
+- [ubuntu.md](./docs/ubuntu.md)
+- [wordpress.md](./docs/wordpress.md)
+
+### AI Usage
+- Translation
+- List the elements to study for this assignment
+- Troubleshooting When Issues Occur
+

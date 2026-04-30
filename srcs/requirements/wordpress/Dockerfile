@@ -23,4 +23,4 @@ RUN		curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cl
 		&& chmod +x /init_wordpress.sh \
 		&& rm -rf /var/lib/apt/lists/*
 
-ENTRYPOINT ["./init_wordpress.sh"]
+ENTRYPOINT ["/init_wordpress.sh"]

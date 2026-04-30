@@ -6,14 +6,14 @@
 #    By: mmachida <mmachida@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/21 20:26:15 by mmachida          #+#    #+#              #
-#    Updated: 2026/04/26 21:57:03 by mmachida         ###   ########.fr        #
+#    Updated: 2026/05/01 00:35:49 by mmachida         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 BUILDFILE = ./srcs/docker-compose.yml
 LOCALPATH = /home/mmachida/data/
 
-all: build prepare up
+all: prepare up
 
 prepare:
 	- @mkdir -p $(LOCALPATH)db_data
@@ -43,7 +43,7 @@ stop:
 	 docker compose -f $(BUILDFILE) stop
 
 down: 
-	 docker compose -f $(BUILDFILE) down --rmi all
+	 docker compose -f $(BUILDFILE) down
 
 build:
 	docker compose -f $(BUILDFILE) build --no-cache
