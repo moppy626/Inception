@@ -68,7 +68,7 @@ pm.min_spare_servers = 1
 # 待機中の子プロセスの最大数。多すぎる場合は自動で減らされる
 pm.max_spare_servers = 3
 # FastCGI の statusリクエスト を受け付けるアドレス
-pm.status_listen = wordpress:9001
+pm.status_listen = wordpress:9000
 # ワーカーの標準出力および標準エラー出力を本体のエラーログにリダイレクトします
 catch_workers_output = yes
 # 任意の環境変数が FPM ワーカープロセスに到達してしまうことを防ぐために、 ワーカー内の環境をいったんクリアしてから、このプールの設定で指定された環境変数を追加します

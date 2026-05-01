@@ -63,16 +63,16 @@ wordpress:
 nginx:
 	docker compose -f $(BUILDFILE) exec nginx bin/bash 
 
-# clean:
-# 	- docker system prune
-# 	- docker compose -f $(BUILDFILE) down -v>/dev/null 2>&1
-# 	- docker stop $(docker ps -qa)>/dev/null 2>&1
-# 	- docker rm $(docker ps -qa)>/dev/null 2>&1
-# 	- docker rmi -f $(docker images -qa)>/dev/null 2>&1
-# 	- docker volume rm $(docker volume ls -q)>/dev/null 2>&1
-# 	- docker network rm $(docker network ls -q)>/dev/null 2>&1
-# 	- sudo rm -rf $(LOCALPATH)db_data/*>/dev/null 2>&1
-# 	- sudo rm -rf $(LOCALPATH)wp_data/*>/dev/null 2>&1
+clean:
+	- docker compose -f $(BUILDFILE) down -v>/dev/null 2>&1
+	- docker stop $(docker ps -qa)>/dev/null 2>&1
+	- docker rm $(docker ps -qa)>/dev/null 2>&1
+	- docker rmi -f $(docker images -qa)>/dev/null 2>&1
+	- docker volume rm $(docker volume ls -q)>/dev/null 2>&1
+	- docker network rm $(docker network ls -q)>/dev/null 2>&1
+	- docker system prune
+	- sudo rm -rf $(LOCALPATH)db_data/*>/dev/null 2>&1
+	- sudo rm -rf $(LOCALPATH)wp_data/*>/dev/null 2>&1
 
 test:
 	curl -k https://mmachida.42.fr

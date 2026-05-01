@@ -68,6 +68,7 @@ httpsは、httpの通信を通信を暗号化したもの。
 	- PATH_INFO:その後ろの情報
 - fastcgi_pass wordpress:9000;
 	wordpressコンテナのPHP-FPMデフォルト待ち受けポートに転送
+- ポート0から1023まではwell-known portなので、設定するときはそれ以上の番号を使う必要がある。1024から49151までは自由に使える。
 ## 参考
 * [Ubuntu 20.04にNginxをインストールする方法](https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-20-04-ja)
 * [Official build of Nginx.](https://hub.docker.com/_/nginx)
