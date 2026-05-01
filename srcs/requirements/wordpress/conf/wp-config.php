@@ -16,6 +16,10 @@ define('WP_SITEURL',       getenv('WORDPRESS_URL'));
 // wordpressはこれが定義されていること前提で動いているので設定必須
 $table_prefix = 'wp_';
 
+// 予約投稿の公開やコメント通知メール送信などの機能はhostsファイルにmmachida.42.frがないと
+// 実行できずエラーになるため、その処理が走らないようにする
+define('DISABLE_WP_CRON', true);
+
 // wordpressがルートとして用いるパス
 if ( ! defined( 'ABSPATH' ) ) {
 	define( 'ABSPATH', '/var/www/html/');

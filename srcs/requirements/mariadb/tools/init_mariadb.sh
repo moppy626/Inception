@@ -8,4 +8,4 @@ ALTER USER 'root'@'localhost' IDENTIFIED BY '$(cat /run/secrets/db_root_password
 EOF
 
 exec mysqld --user=mysql --init-file=/tmp/init.sql
-wait
+
