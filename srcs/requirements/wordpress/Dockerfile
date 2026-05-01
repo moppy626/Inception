@@ -13,9 +13,9 @@ RUN		apt-get update \
 		&& chown -R www-data:www-data /var/www/html \
 		&& rm -rf latest.tar.gz wordpress
 
-COPY 	www.conf /etc/php/8.2/fpm/pool.d/www.conf
-COPY 	wp-config.php /var/www/html/wp-config.php   
-COPY	init_wordpress.sh /init_wordpress.sh
+COPY 	conf/www.conf /etc/php/8.2/fpm/pool.d/www.conf
+COPY 	conf/wp-config.php /var/www/html/wp-config.php   
+COPY	tools/init_wordpress.sh /init_wordpress.sh
 
 RUN		curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar  \
 		&& chmod +x wp-cli.phar  \

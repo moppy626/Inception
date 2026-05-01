@@ -7,7 +7,7 @@ RUN		apt-get update \
 		&& rm -rf /var/lib/apt/lists/* 
 
 COPY	conf/nginx.conf /etc/nginx/nginx.conf
-COPY	init_nginx.sh /init_nginx.sh
+COPY	tools/init_nginx.sh /init_nginx.sh
 RUN		chmod +x /init_nginx.sh
 
 ENTRYPOINT 	["/init_nginx.sh"]
